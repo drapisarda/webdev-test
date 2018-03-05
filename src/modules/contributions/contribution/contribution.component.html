@@ -1,0 +1,26 @@
+<div class="contribution">
+  <div class="contribution__recap">
+    <div class="contribution__recap__title">
+      <p>
+        {{title.substr(0, maxTitleChars)}}
+        <span *ngIf="!!title && title.length > maxTitleChars" class="contribution__recap__title__more">
+          ...
+          <span class="contribution__recap__title__more__cta">show more</span>
+        </span>
+      </p>
+    </div>
+    <div class="contribution__recap__progress_bar">
+      <div class="contribution__recap__progress_bar__bar">
+        <div [ngStyle]="{'width': getProgress() + '%'}" class="contribution__recap__progress_bar__progress">
+          <div [ngStyle]="{'left': getProgress() + '%'}" class="contribution__recap__progress_bar__bullet"></div>
+        </div>
+      </div>
+      <div class="contribution__recap__progress_bar__percentage">{{ getProgress() }} %</div>
+    </div>
+    <div class="contribution__recap__details">
+      <div *ngIf="!!creationDate" class="contribution__recap__details__detail">Creation: {{creationDate}}</div>
+      <div *ngIf="!!targetDate" class="contribution__recap__details__detail">Target: {{targetDate}}</div>
+      <div *ngIf="status" class="contribution__recap__details__detail">{{status}}</div>
+    </div>
+  </div>
+</div>
