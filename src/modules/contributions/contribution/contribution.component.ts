@@ -10,6 +10,9 @@ export class ContributionComponent {
   maxTitleChars = 120;
 
   @Input()
+  id: number;
+
+  @Input()
   title: string;
 
   @Input()

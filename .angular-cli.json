@@ -19,7 +19,7 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "dr",
       "styles": [
-        "styles.css"
+        "assets/scss/basics.scss"
       ],
       "scripts": [],
       "environmentSource": "environments/environment.ts",

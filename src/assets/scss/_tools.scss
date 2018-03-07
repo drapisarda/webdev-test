@@ -1,0 +1,9 @@
+@import "~breakpoint-sass/stylesheets/breakpoint";
+@import "vars";
+
+@mixin container(){
+  width: $container-width;
+  padding: 0 20px;
+  max-width: 100%;
+  margin: auto;
+}

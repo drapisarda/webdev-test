@@ -2,12 +2,18 @@
   <div class="contribution__recap">
     <div class="contribution__recap__title">
       <p>
-        {{title.substr(0, maxTitleChars)}}
+        {{ title }}
         <span *ngIf="!!title && title.length > maxTitleChars" class="contribution__recap__title__more">
-          ...
           <span class="contribution__recap__title__more__cta">show more</span>
+          <span
+            class="contribution__recap__title__more__cta contribution__recap__title__more__cta--less">show less</span>
         </span>
       </p>
+    </div>
+    <div class="contribution__recap__edit">
+      <span class="">
+        <img src="../../../assets/images/pencil.svg" alt="Edit contribution title">
+      </span>
     </div>
     <div class="contribution__recap__progress_bar">
       <div class="contribution__recap__progress_bar__bar">
@@ -21,6 +27,65 @@
       <div *ngIf="!!creationDate" class="contribution__recap__details__detail">Creation: {{creationDate}}</div>
       <div *ngIf="!!targetDate" class="contribution__recap__details__detail">Target: {{targetDate}}</div>
       <div *ngIf="status" class="contribution__recap__details__detail">{{status}}</div>
+    </div>
+  </div>
+
+  <!--!!!!-->
+
+  <!--todo differenziare id elementi form-->
+
+  <!--!!!!!-->
+
+  <div class="contribution__edit">
+    <div class="contribution__edit__tabs">
+      <div class="contribution__edit__tabs__content">
+        <div class="contribution__edit__tabs__tab contribution__edit__tabs__tab--selected">Measurements</div>
+        <div class="contribution__edit__tabs__tab">Dialogue</div>
+      </div>
+    </div>
+    <div class="contribution__edit__measurements">
+      <form action="#" id="form1" method="post">
+        <div class="form_group">
+          <label for="description_{{id}}">Contributions description and measurements:</label>
+          <textarea required name="description" id="description_{{id}}" cols="30" rows="10"></textarea>
+        </div>
+        <div class="form_group form_group--half"><label for="status">Status</label>
+          <select name="status" id="status">
+            <option value="active">Active</option>
+            <option value="disabled">Disabled</option>
+            <option value="review">To be reviewed</option>
+          </select>
+        </div>
+        <div class="form_group form_group--half">
+          <label for="visibility_{{id}}">Who can see this contribution:</label>
+          <select name="visibility" id="visibility_{{id}}">
+            <option value="author">The Author</option>
+            <option value="collaborators">The author and collaborators</option>
+            <option value="all">Everybody</option>
+          </select>
+        </div>
+        <div class="form_group form_group--half">
+          <label for="target-date_{{id}}">Target date:</label>
+          <select name="target-date" id="target-date_{{id}}">
+            <option value=""></option>
+            <option value=""></option>
+            <option value=""></option>
+          </select></div>
+        <div class="form_group form_group--half">
+          <label for="position_{{id}}">Job position</label>
+          <select name="position" id="position_{{id}}">
+            <option value="manager">Manager</option>
+            <option value="writer">Writer</option>
+            <option value="reviewer">Reviewer</option>
+          </select>
+        </div>
+      </form>
+      <div class="contribution__edit__measurements__form_ctas">
+        <div class="contribution__edit__measurements__form_ctas__content">
+          <button>Cancel</button>
+          <button type="submit" form="form1" value="Submit">Save</button>
+        </div>
+      </div>
     </div>
   </div>
 </div>
