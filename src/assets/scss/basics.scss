@@ -8,6 +8,10 @@
   outline: none;
 }
 
+body{
+  background: $grey-1;
+}
+
 .form_group {
 
   label {
@@ -26,7 +30,6 @@
     background: $white;
     margin-bottom: 15px;
     font-size: 1em;
-
   }
 
   textarea {
@@ -35,7 +38,11 @@
   }
 }
 
-form {
+button{
+  font-size: 1em;
+}
+
+.form_container {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;

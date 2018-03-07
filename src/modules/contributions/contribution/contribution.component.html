@@ -1,91 +1,120 @@
-<div class="contribution">
-  <div class="contribution__recap">
-    <div class="contribution__recap__title">
-      <p>
-        {{ title }}
-        <span *ngIf="!!title && title.length > maxTitleChars" class="contribution__recap__title__more">
-          <span class="contribution__recap__title__more__cta">show more</span>
-          <span
-            class="contribution__recap__title__more__cta contribution__recap__title__more__cta--less">show less</span>
-        </span>
-      </p>
-    </div>
-    <div class="contribution__recap__edit">
-      <span class="">
-        <img src="../../../assets/images/pencil.svg" alt="Edit contribution title">
-      </span>
-    </div>
-    <div class="contribution__recap__progress_bar">
-      <div class="contribution__recap__progress_bar__bar">
-        <div [ngStyle]="{'width': getProgress() + '%'}" class="contribution__recap__progress_bar__progress">
-          <div [ngStyle]="{'left': getProgress() + '%'}" class="contribution__recap__progress_bar__bullet"></div>
+<div *ngIf="!!isValid" class="contribution {{contributionEditorClass}}">
+  <form action="#" method="post">
+    <div class="contribution__recap {{titleClassEdit}}">
+      <div class="contribution__recap__content">
+
+
+        <!-- not that nice, but if reactin on __recap click would make click on title edit pencil collide -->
+
+        <div class="contribution__recap__title {{titleClassOpen}}">
+          <div *ngIf="!!title" class="contribution__recap__title__content">
+          <span (click)="toggleContributionEditor()">
+            {{title}}
+          </span>
+            <div
+              class="contribution__recap__title__more"
+            >
+              <button (click)="toggleShowMoreTitle()">
+                {{showMoreTitleCta}}
+              </button>
+            </div>
+          </div>
+          <div class="form_group contribution__recap__title__edit">
+          <textarea id="title_{{id}}" cols="30" rows="10" [(ngModel)]="title" name="title">
+            {{title}}
+          </textarea>
+          </div>
+        </div>
+        <div class="contribution__recap__edit" (click)="toggleEditTitle()">
+          <svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg"
+               xmlns:xlink="http://www.w3.org/1999/xlink">
+            <defs></defs>
+            <g id="Components/List/show" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"
+               transform="translate(-665.000000, -22.000000)" stroke-linecap="round" stroke-linejoin="round">
+              <g id="Icons/16px/office/Edit/Enabled" transform="translate(657.000000, 14.000000)" stroke="#536F85">
+                <g id="icon/pos/edit" transform="translate(8.000000, 8.000000)">
+                  <g id="Group-6">
+                    <g transform="translate(1.333333, 1.333333)">
+                      <polygon id="Stroke-2"
+                               points="8.83926667 1.81833333 1.33993333 9.321 -6.66666667e-05 13.333 4.01326667 11.9983333 11.5152667 4.49166667"></polygon>
+                      <path
+                        d="M8.83926667,1.818 L10.4939333,0.176 C10.7239333,-0.0586666667 11.0972667,-0.0586666667 11.3266,0.176 L13.1606,2.008 C13.3912667,2.24333333 13.3912667,2.624 13.1606,2.85933333 L11.5152667,4.49133333 L8.83926667,1.818 Z"
+                        id="Stroke-4"></path>
+                    </g>
+                  </g>
+                </g>
+              </g>
+            </g>
+          </svg>
+          <!--<img src="../../../assets/images/pencil.svg" alt="Edit contribution title">-->
+        </div>
+        <div class="contribution__recap__progress_bar">
+          <div class="contribution__recap__progress_bar__bar">
+            <div [ngStyle]="{'width': getProgress() + '%'}" class="contribution__recap__progress_bar__progress">
+              <div [ngStyle]="{'left': getProgress() + '%'}" class="contribution__recap__progress_bar__bullet"></div>
+            </div>
+          </div>
+          <div class="contribution__recap__progress_bar__percentage">{{ getProgress() }} %</div>
         </div>
       </div>
-      <div class="contribution__recap__progress_bar__percentage">{{ getProgress() }} %</div>
-    </div>
-    <div class="contribution__recap__details">
-      <div *ngIf="!!creationDate" class="contribution__recap__details__detail">Creation: {{creationDate}}</div>
-      <div *ngIf="!!targetDate" class="contribution__recap__details__detail">Target: {{targetDate}}</div>
-      <div *ngIf="status" class="contribution__recap__details__detail">{{status}}</div>
-    </div>
-  </div>
-
-  <!--!!!!-->
-
-  <!--todo differenziare id elementi form-->
-
-  <!--!!!!!-->
-
-  <div class="contribution__edit">
-    <div class="contribution__edit__tabs">
-      <div class="contribution__edit__tabs__content">
-        <div class="contribution__edit__tabs__tab contribution__edit__tabs__tab--selected">Measurements</div>
-        <div class="contribution__edit__tabs__tab">Dialogue</div>
+      <div class="contribution__recap__details">
+        <div *ngIf="!!creationDate" class="contribution__recap__details__detail">Creation: {{creationDate}}</div>
+        <div *ngIf="!!targetDate" class="contribution__recap__details__detail">Target: {{targetDate}}</div>
+        <div *ngIf="status" class="contribution__recap__details__detail">{{status}}</div>
       </div>
     </div>
-    <div class="contribution__edit__measurements">
-      <form action="#" id="form1" method="post">
-        <div class="form_group">
-          <label for="description_{{id}}">Contributions description and measurements:</label>
-          <textarea required name="description" id="description_{{id}}" cols="30" rows="10"></textarea>
+
+    <div class="contribution__edit">
+      <div class="contribution__edit__tabs">
+        <div class="contribution__edit__tabs__content">
+          <div class="contribution__edit__tabs__tab contribution__edit__tabs__tab--selected">Measurements</div>
+          <div class="contribution__edit__tabs__tab">Dialogue</div>
         </div>
-        <div class="form_group form_group--half"><label for="status">Status</label>
-          <select name="status" id="status">
-            <option value="active">Active</option>
-            <option value="disabled">Disabled</option>
-            <option value="review">To be reviewed</option>
-          </select>
+      </div>
+      <div class="contribution__edit__measurements">
+        <div class="form_container">
+          <div class="form_group">
+            <label for="description_{{id}}">Contributions description and measurements:</label>
+            <textarea required name="description" id="description_{{id}}" cols="30" rows="10"></textarea>
+          </div>
+          <div class="form_group form_group--half"><label for="status">Status</label>
+            <select required name="status" id="status">
+              <option value="active">Active</option>
+              <option value="disabled">Disabled</option>
+              <option value="review">To be reviewed</option>
+            </select>
+          </div>
+          <div class="form_group form_group--half">
+            <label for="visibility_{{id}}">Who can see this contribution:</label>
+            <select required name="visibility" id="visibility_{{id}}">
+              <option value="author">The Author</option>
+              <option value="collaborators">The author and collaborators</option>
+              <option value="all">Everybody</option>
+            </select>
+          </div>
+          <div class="form_group form_group--half">
+            <label for="target-date_{{id}}">Target date:</label>
+            <select required name="target-date" id="target-date_{{id}}">
+              <option value=""></option>
+              <option value=""></option>
+              <option value=""></option>
+            </select></div>
+          <div class="form_group form_group--half">
+            <label for="position_{{id}}">Job position</label>
+            <select required name="position" id="position_{{id}}">
+              <option value="manager">Manager</option>
+              <option value="writer">Writer</option>
+              <option value="reviewer">Reviewer</option>
+            </select>
+          </div>
         </div>
-        <div class="form_group form_group--half">
-          <label for="visibility_{{id}}">Who can see this contribution:</label>
-          <select name="visibility" id="visibility_{{id}}">
-            <option value="author">The Author</option>
-            <option value="collaborators">The author and collaborators</option>
-            <option value="all">Everybody</option>
-          </select>
-        </div>
-        <div class="form_group form_group--half">
-          <label for="target-date_{{id}}">Target date:</label>
-          <select name="target-date" id="target-date_{{id}}">
-            <option value=""></option>
-            <option value=""></option>
-            <option value=""></option>
-          </select></div>
-        <div class="form_group form_group--half">
-          <label for="position_{{id}}">Job position</label>
-          <select name="position" id="position_{{id}}">
-            <option value="manager">Manager</option>
-            <option value="writer">Writer</option>
-            <option value="reviewer">Reviewer</option>
-          </select>
-        </div>
-      </form>
-      <div class="contribution__edit__measurements__form_ctas">
-        <div class="contribution__edit__measurements__form_ctas__content">
-          <button>Cancel</button>
-          <button type="submit" form="form1" value="Submit">Save</button>
+        <div class="contribution__edit__measurements__form_ctas">
+          <div class="contribution__edit__measurements__form_ctas__content">
+            <button>Cancel</button>
+            <button type="submit" value="Submit">Save</button>
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  </form>
 </div>

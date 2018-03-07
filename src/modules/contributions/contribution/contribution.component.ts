@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
   selector: 'dr-contribution',
@@ -6,8 +6,12 @@ import {Component, Input} from '@angular/core';
   styleUrls: ['contribution.component.scss'],
 })
 
-export class ContributionComponent {
-  maxTitleChars = 120;
+export class ContributionComponent implements OnInit{
+  isValid = false;
+  showMoreTitleCta = '... show more';
+  titleClassOpen = '';
+  titleClassEdit = '';
+  contributionEditorClass = '';
 
   @Input()
   id: number;
@@ -39,5 +43,40 @@ export class ContributionComponent {
     return this.progress;
   }
 
+
+  ngOnInit(): void {
+    if (!!this.id && !!this.targetDate) {
+      this.isValid = true;
+    }
+  }
+
+  toggleShowMoreTitle(): void {
+    if (this.titleClassOpen === '') {
+      this.showMoreTitleCta = 'show less';
+      this.titleClassOpen = 'contribution__recap__title--open';
+      return;
+    }
+
+    this.showMoreTitleCta = '... show more';
+    this.titleClassOpen = '';
+  }
+
+  toggleEditTitle(): void {
+    if (this.titleClassEdit === '') {
+      this.titleClassEdit = 'contribution__recap--title-edit';
+      return;
+    }
+
+    this.titleClassEdit = '';
+  }
+
+  toggleContributionEditor(): void {
+    if (this.contributionEditorClass === '') {
+      this.contributionEditorClass = 'contribution--edit';
+      return;
+    }
+
+    this.contributionEditorClass = '';
+  }
 
 }
