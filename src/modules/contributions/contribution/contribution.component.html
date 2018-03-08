@@ -1,5 +1,5 @@
 <div *ngIf="!!isValid" class="contribution {{contributionEditorClass}}">
-  <form action="#" method="post">
+  <form [formGroup]="form" action="#" method="post" (ngSubmit)="onSubmit()">
     <div class="contribution__recap {{titleClassEdit}}">
       <div class="contribution__recap__content">
 
@@ -8,7 +8,7 @@
         <div class="contribution__recap__title {{titleClassOpen}}">
           <div *ngIf="!!title" class="contribution__recap__title__content">
           <span (click)="toggleContributionEditor()">
-            {{title}}
+            {{form.get('title').value}}
           </span>
             <div
               class="contribution__recap__title__more"
@@ -19,13 +19,13 @@
             </div>
           </div>
           <div class="form_group contribution__recap__title__edit">
-          <textarea id="title_{{id}}" cols="30" rows="10" [(ngModel)]="title" name="title">
-            {{title}}
+          <textarea formControlName="title" cols="30" rows="10" name="title">
           </textarea>
           </div>
         </div>
         <div class="contribution__recap__actions">
-          <svg (click)="toggleEditTitle()" width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg"
+          <svg (click)="toggleEditTitle()" width="16px" height="16px" viewBox="0 0 16 16" version="1.1"
+               xmlns="http://www.w3.org/2000/svg"
                xmlns:xlink="http://www.w3.org/1999/xlink">
             <defs></defs>
             <g id="Components/List/show" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"
@@ -49,11 +49,16 @@
         </div>
         <div class="contribution__recap__progress_bar">
           <div class="contribution__recap__progress_bar__bar">
-            <div [ngStyle]="{'width': getProgress() + '%'}" class="contribution__recap__progress_bar__progress">
-              <div [ngStyle]="{'left': getProgress() + '%'}" class="contribution__recap__progress_bar__bullet"></div>
+            <input type="range" formControlName="progress">
+            <div class="contribution__recap__progress_bar__decoration">
+              <!--https://jsfiddle.net/brenna/f4uq9edL/?utm_source=website&utm_medium=embed&utm_campaign=f4uq9edL-->
+              <div [ngStyle]="{'width': (form.get('progress').value) + '%'}"
+                   class="contribution__recap__progress_bar__progress">
+                <!--<div [ngStyle]="{'left': getProgress() + '%'}" class="contribution__recap__progress_bar__bullet"></div>-->
+              </div>
             </div>
           </div>
-          <div class="contribution__recap__progress_bar__percentage">{{ getProgress() }} %</div>
+          <div class="contribution__recap__progress_bar__percentage">{{form.get('progress').value}} %</div>
         </div>
       </div>
       <div class="contribution__recap__details">
@@ -73,38 +78,32 @@
       <div class="contribution__edit__measurements">
         <div class="form_container">
           <div class="form_group">
-            <label for="description_{{id}}">Contributions description and measurements:</label>
-            <textarea required name="description" id="description_{{id}}" cols="30" rows="10"></textarea>
+            <label>Contributions description and measurements:</label>
+            <textarea required formControlName="description" cols="30" rows="10"></textarea>
           </div>
-          <div class="form_group form_group--half"><label for="status">Status</label>
-            <select required name="status" id="status">
-              <option >-------</option>
+          <div class="form_group form_group--half">
+            <label>Status</label>
+            <select formControlName="status">
               <option value="active">Active</option>
               <option value="disabled">Disabled</option>
               <option value="review">To be reviewed</option>
             </select>
           </div>
           <div class="form_group form_group--half">
-            <label for="visibility_{{id}}">Who can see this contribution:</label>
-            <select required name="visibility" id="visibility_{{id}}">
-              <option >-------</option>
+            <label>Who can see this contribution:</label>
+            <select formControlName="visibility">
               <option value="author">The Author</option>
               <option value="collaborators">The author and collaborators</option>
               <option value="all">Everybody</option>
             </select>
           </div>
           <div class="form_group form_group--half">
-            <label for="target-date_{{id}}">Target date:</label>
-            <select required name="target-date" id="target-date_{{id}}">
-              <option >-------</option>
-              <option value=""></option>
-              <option value=""></option>
-              <option value=""></option>
-            </select></div>
+            <label>Target date:</label>
+            <input type="text" required formControlName="targetDate">
+          </div>
           <div class="form_group form_group--half">
-            <label for="position_{{id}}">Job position</label>
-            <select required name="position" id="position_{{id}}">
-              <option >-------</option>
+            <label>Job position</label>
+            <select formControlName="position">
               <option value="manager">Manager</option>
               <option value="writer">Writer</option>
               <option value="reviewer">Reviewer</option>
@@ -113,7 +112,7 @@
         </div>
         <div class="contribution__edit__measurements__form_ctas">
           <div class="contribution__edit__measurements__form_ctas__content">
-            <button>Cancel</button>
+            <button (click)="toggleContributionEditor(false)">Cancel</button>
             <button type="submit" value="Submit">Save</button>
           </div>
         </div>

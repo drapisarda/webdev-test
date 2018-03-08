@@ -1,11 +1,13 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {FormGroup} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'dr-contribution',
   templateUrl: './contribution.component.html',
   styleUrls: ['contribution.component.scss'],
 })
+
+// https://angular.io/guide/reactive-forms
 
 export class ContributionComponent implements OnInit{
   isValid = false;
@@ -22,6 +24,9 @@ export class ContributionComponent implements OnInit{
   title: string;
 
   @Input()
+  description: string;
+
+  @Input()
   creationDate: string;
 
   @Input()
@@ -32,6 +37,15 @@ export class ContributionComponent implements OnInit{
 
   @Input()
   progress: number;
+
+  @Input()
+  visibility: string;
+
+  @Input()
+  position: string;
+
+  constructor(private _fb: FormBuilder) {
+  }
 
   getProgress(): number {
     if (this.progress <= 0) {
@@ -50,6 +64,8 @@ export class ContributionComponent implements OnInit{
     if (!!this.id && !!this.targetDate) {
       this.isValid = true;
     }
+
+    this._createForm();
   }
 
   toggleShowMoreTitle(): void {
@@ -72,8 +88,8 @@ export class ContributionComponent implements OnInit{
     this.titleClassEdit = '';
   }
 
-  toggleContributionEditor(): void {
-    if (this.contributionEditorClass === '') {
+  toggleContributionEditor(action?: boolean): void {
+    if (!!action || ((undefined === action) && this.contributionEditorClass === '')) {
       this.contributionEditorClass = 'contribution--edit';
       return;
     }
@@ -81,4 +97,21 @@ export class ContributionComponent implements OnInit{
     this.contributionEditorClass = '';
   }
 
+  // https://angular.io/guide/reactive-forms
+  _createForm(): void {
+    this.form = this._fb.group({
+      title: [this.title, Validators.required],
+      description: [this.description, Validators.required],
+      creationDate: [this.targetDate, Validators.required],
+      targetDate: [this.targetDate, Validators.required],
+      status: [this.status, Validators.required],
+      progress: [this.progress, Validators.required],
+      visibility: [this.visibility, Validators.required],
+      position: [this.position, Validators.required],
+    });
+  }
+
+  onSubmit() {
+    console.log(this.form.valid);
+  }
 }

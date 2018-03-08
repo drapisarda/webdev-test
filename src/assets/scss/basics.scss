@@ -31,6 +31,10 @@ body{
     background: $white;
     margin-bottom: 15px;
     font-size: 1em;
+
+    &.ng-invalid{
+      box-shadow: 0 0 8px $error;
+    }
   }
 
   textarea {
