@@ -1,4 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'dr-contribution',
@@ -12,6 +13,7 @@ export class ContributionComponent implements OnInit{
   titleClassOpen = '';
   titleClassEdit = '';
   contributionEditorClass = '';
+  form: FormGroup;
 
   @Input()
   id: number;

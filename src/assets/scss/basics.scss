@@ -4,8 +4,9 @@
 
 
 *:focus{
-  box-shadow: 0 0 3pt 2pt $blue-2;
   outline: none;
+  border-color: $blue-2;
+  box-shadow: 0 0 8px rgba(56, 111, 157, 0.8);
 }
 
 body{

@@ -19,7 +19,7 @@
 
     &__content{
       display: flex;
-      flex-wrap: wrap;
+      justify-content: space-between;
     }
 
     &--title-edit &__title__content {
@@ -30,7 +30,7 @@
       display: block;
     }
 
-    &--title-edit &__edit svg{
+    &--title-edit &__actions svg{
       background: $blue-2;
       * {
         stroke: $white;
@@ -92,12 +92,13 @@
       }
     }
 
-    &__edit {
+    &__actions {
+      display: none;
       flex: 1;
       border-radius: 20px;
       margin-left: 10px;
       @include breakpoint($medium) {
-        padding: 0 30px 20px 30px;
+        padding: 0 30px 0 30px;
       }
 
       svg {
@@ -273,5 +274,9 @@
     @include breakpoint($medium) {
       max-height: 600px;
     }
+  }
+
+  &--edit &__recap__actions{
+    display: block;
   }
 }

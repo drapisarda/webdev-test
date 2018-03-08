@@ -3,8 +3,7 @@
     <div class="contribution__recap {{titleClassEdit}}">
       <div class="contribution__recap__content">
 
-
-        <!-- not that nice, but if reactin on __recap click would make click on title edit pencil collide -->
+        <!-- not that nice, but if reacting on __recap click would make click on title edit pencil collide -->
 
         <div class="contribution__recap__title {{titleClassOpen}}">
           <div *ngIf="!!title" class="contribution__recap__title__content">
@@ -25,8 +24,8 @@
           </textarea>
           </div>
         </div>
-        <div class="contribution__recap__edit" (click)="toggleEditTitle()">
-          <svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg"
+        <div class="contribution__recap__actions">
+          <svg (click)="toggleEditTitle()" width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg"
                xmlns:xlink="http://www.w3.org/1999/xlink">
             <defs></defs>
             <g id="Components/List/show" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"
@@ -79,6 +78,7 @@
           </div>
           <div class="form_group form_group--half"><label for="status">Status</label>
             <select required name="status" id="status">
+              <option >-------</option>
               <option value="active">Active</option>
               <option value="disabled">Disabled</option>
               <option value="review">To be reviewed</option>
@@ -87,6 +87,7 @@
           <div class="form_group form_group--half">
             <label for="visibility_{{id}}">Who can see this contribution:</label>
             <select required name="visibility" id="visibility_{{id}}">
+              <option >-------</option>
               <option value="author">The Author</option>
               <option value="collaborators">The author and collaborators</option>
               <option value="all">Everybody</option>
@@ -95,6 +96,7 @@
           <div class="form_group form_group--half">
             <label for="target-date_{{id}}">Target date:</label>
             <select required name="target-date" id="target-date_{{id}}">
+              <option >-------</option>
               <option value=""></option>
               <option value=""></option>
               <option value=""></option>
@@ -102,6 +104,7 @@
           <div class="form_group form_group--half">
             <label for="position_{{id}}">Job position</label>
             <select required name="position" id="position_{{id}}">
+              <option >-------</option>
               <option value="manager">Manager</option>
               <option value="writer">Writer</option>
               <option value="reviewer">Reviewer</option>
