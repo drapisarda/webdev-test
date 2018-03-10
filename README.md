@@ -4,10 +4,11 @@
 This is a web development test focused on implementing a web layout and the common user experiences.  
 
 Preview: 
-![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 1")
+
+![alt text](https://github.com/drapisarda/webdev-test/raw/master/src/assets/images/preview.png "Logo Title Text 1")
 
   
-Specifications:  
+## Specifications:  
 1. Open tiles (proper animations / transitions)  
 2. Form fields validation (all fields required)  
 3. Form fields interaction (focus / active state)  
@@ -50,4 +51,4 @@ This is just a test project so not that prone to pull requests, but any suggesti
 Thank you in advice.
 
 ## Demo
-[Here it is!](www.danielerapisarda.com/proj/webdev-test/)
+[Here it is!](http://www.danielerapisarda.com/proj/webdev-test/)
