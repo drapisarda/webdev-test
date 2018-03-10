@@ -13,6 +13,16 @@ body{
   background: $grey-1;
 }
 
+.invalid{
+  box-shadow: 0 0 8px $error;
+}
+
+form.form-invalid .ng-invalid,
+.invalid,
+.form_group .ng-invalid.ng-touched{
+  box-shadow: 0 0 8px $error;
+}
+
 .form_group {
 
   label {
@@ -32,10 +42,6 @@ body{
     margin-bottom: 15px;
     font-size: 1em;
 
-    .form-invalid &.ng-invalid,
-    &.ng-invalid.ng-touched{
-      box-shadow: 0 0 8px $error;
-    }
   }
 
   textarea {

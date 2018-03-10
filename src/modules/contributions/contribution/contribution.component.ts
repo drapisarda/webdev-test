@@ -95,15 +95,6 @@ export class ContributionComponent implements OnInit {
     }
   }
 
-  toggleContributionEditor(action?: boolean): void {
-    if (!!action || ((undefined === action) && !this.contributionEdit)) {
-      this.contributionEdit = true;
-      return;
-    }
-
-    this.contributionEdit = false;
-  }
-
   _createForm(): void {
     this.form = this._fb.group({
       title: [this.title, Validators.required],

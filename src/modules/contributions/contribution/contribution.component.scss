@@ -45,18 +45,20 @@
         flex-basis: 50%;
       }
 
-      span{
+      &__title{
         cursor: pointer;
-      }
-
-      &__content {
+        min-height: 1.4em;
         max-height: 2.8em;
         overflow: hidden;
         transition: max-height 0.3s ease;
         position: relative;
       }
 
-      &--open &__content {
+      &__content {
+        position: relative;
+      }
+
+      &--open &__title__title{
         max-height: 5000px;
         transition: max-height 0.8s ease;
       }
@@ -167,22 +169,31 @@
           -webkit-appearance: none;
           appearance: none;
           background: white;
-          width: 15px;
-          height: 15px;
+          width: 25px;
+          height: 25px;
           border: 1px solid $green;
           border-radius: 50%;
           cursor: pointer;
+
+          @include breakpoint($medium){
+            width: 15px;
+            height: 15px;
+          }
         }
 
         &::-webkit-slider-thumb{
           -webkit-appearance: none;
           appearance: none;
           background: white;
-          width: 15px;
-          height: 15px;
+          width: 25px;
+          height: 25px;
           border: 1px solid $green;
           border-radius: 50%;
           cursor: pointer;
+          @include breakpoint($medium){
+            width: 15px;
+            height: 15px;
+          }
         }
       }
 
@@ -192,8 +203,11 @@
         height: 8px;
         border-radius: 5px;
         position: absolute;
-        top: 4px;
+        top: 8px;
         width: 99%;
+        @include breakpoint($medium){
+          top: 4px;
+        }
 
         &:focus {
           border: 0;
@@ -212,6 +226,13 @@
         color: $green;
         flex-basis: 3em;
         text-align: right;
+        min-height: 30px;
+        display: flex;
+        align-items: center;
+
+        @include breakpoint($medium){
+          min-height: 1em;
+        }
       }
     }
 
@@ -305,10 +326,18 @@
           width: $container-width / 3 * 2;
           display: flex;
           justify-content: space-between;
+          align-items: center;
+          flex-direction: column;
+          padding-top: 20px;
+
+          @include breakpoint($small){
+            flex-direction: row;
+          }
         }
 
         &__advice{
-          padding: 20px;
+          padding: 0 20px 20px 20px;
+          flex: 1;
 
           &__error{
             color: red;
@@ -316,8 +345,9 @@
         }
 
         &__content {
+          flex: 1;
           text-align: right;
-          padding: 20px;
+          padding: 0 20px 20px 20px;
         }
 
         button {
@@ -349,7 +379,7 @@
     max-height: 850px;
     transition: max-height 0.8s ease;
     @include breakpoint($small) {
-      max-height: 750px;
+      max-height: 1000px;
     }
     @include breakpoint($medium) {
       max-height: 600px;

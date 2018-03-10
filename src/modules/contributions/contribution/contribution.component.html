@@ -1,13 +1,15 @@
 <div *ngIf="!!isValid" class="contribution" [ngClass]="{'contribution--edit': contributionEdit}">
-  <form [formGroup]="form" action="#" method="post" (ngSubmit)="onSubmit()">
+  <form [formGroup]="form" action="#" method="post" (ngSubmit)="onSubmit()"
+  [ngClass]="{'form-invalid': showFormErrors()}"
+  >
     <div class="contribution__recap" [ngClass]="{'contribution__recap--title-edit': titleEdit}">
       <div class="contribution__recap__content">
 
         <div class="contribution__recap__title" [ngClass]="{'contribution__recap__title--open': titleOpen}">
-          <div *ngIf="!!title" class="contribution__recap__title__content">
-          <span (click)="openContributionEdit()">
-            {{form.get('title').value}}
-          </span>
+          <div *ngIf="!!title" class="contribution__recap__title__content" [ngClass]="{'invalid': form.get('title').invalid}">
+            <div class="contribution__recap__title__title" (click)="openContributionEdit()">
+              {{form.get('title').value}}
+            </div>
             <div
               class="contribution__recap__title__more"
             >
@@ -108,10 +110,12 @@
         <div class="contribution__edit__measurements__form_ctas">
           <div class="contribution__edit__measurements__form_ctas__container">
             <div class="contribution__edit__measurements__form_ctas__advice">
-              <span class="contribution__edit__measurements__form_ctas__advice__error" *ngIf="showFormErrors()">
+              <span class="contribution__edit__measurements__form_ctas__advice__error"
+                    [ngStyle]="{'visibility': showFormErrors() ? 'visible' : 'hidden'}"
+              >
                 Please, fill the required fields.
               </span>
-              <span *ngIf="this.dataPersisted">
+              <span [ngStyle]="{'visibility': this.dataPersisted ? 'visible' : 'hidden'}">
                 Your data has been saved!
               </span>
             </div>
