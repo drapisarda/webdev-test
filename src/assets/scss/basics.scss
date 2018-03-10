@@ -32,7 +32,8 @@ body{
     margin-bottom: 15px;
     font-size: 1em;
 
-    &.ng-invalid{
+    .form-invalid &.ng-invalid,
+    &.ng-invalid.ng-touched{
       box-shadow: 0 0 8px $error;
     }
   }

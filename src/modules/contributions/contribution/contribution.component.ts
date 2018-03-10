@@ -12,9 +12,11 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 export class ContributionComponent implements OnInit{
   isValid = false;
   showMoreTitleCta = '... show more';
-  titleClassOpen = '';
-  titleClassEdit = '';
-  contributionEditorClass = '';
+  titleOpen = false;
+  titleEdit = false;
+  contributionEdit = false;
+  dataPersisted = false;
+  showFormAsValid = true;
   form: FormGroup;
 
   @Input()
@@ -69,35 +71,29 @@ export class ContributionComponent implements OnInit{
   }
 
   toggleShowMoreTitle(): void {
-    if (this.titleClassOpen === '') {
+    this.titleOpen = !this.titleOpen;
+
+    if (this.titleOpen) {
       this.showMoreTitleCta = 'show less';
-      this.titleClassOpen = 'contribution__recap__title--open';
       return;
     }
 
     this.showMoreTitleCta = '... show more';
-    this.titleClassOpen = '';
   }
 
   toggleEditTitle(): void {
-    if (this.titleClassEdit === '') {
-      this.titleClassEdit = 'contribution__recap--title-edit';
-      return;
-    }
-
-    this.titleClassEdit = '';
+    this.titleEdit = !this.titleEdit;
   }
 
   toggleContributionEditor(action?: boolean): void {
-    if (!!action || ((undefined === action) && this.contributionEditorClass === '')) {
-      this.contributionEditorClass = 'contribution--edit';
+    if (!!action || ((undefined === action) && !this.contributionEdit)) {
+      this.contributionEdit = true;
       return;
     }
 
-    this.contributionEditorClass = '';
+    this.contributionEdit = false;
   }
 
-  // https://angular.io/guide/reactive-forms
   _createForm(): void {
     this.form = this._fb.group({
       title: [this.title, Validators.required],
@@ -111,7 +107,19 @@ export class ContributionComponent implements OnInit{
     });
   }
 
+  showFormErrors(): boolean {
+    return !this.showFormAsValid || (this.form.touched && !this.form.valid);
+  }
+
   onSubmit() {
-    console.log(this.form.valid);
+    if (this.form.valid) {
+      // todo: persist the data
+      this.showFormAsValid = true;
+      this.dataPersisted = true;
+      return;
+    }
+
+    this.showFormAsValid = false;
+    this.dataPersisted = false;
   }
 }

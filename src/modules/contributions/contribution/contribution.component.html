@@ -1,11 +1,13 @@
-<div *ngIf="!!isValid" class="contribution {{contributionEditorClass}}">
-  <form [formGroup]="form" action="#" method="post" (ngSubmit)="onSubmit()">
-    <div class="contribution__recap {{titleClassEdit}}">
+<div *ngIf="!!isValid" class="contribution" [ngClass]="{'contribution--edit': contributionEdit}">
+  <form [formGroup]="form" action="#" method="post" (ngSubmit)="onSubmit()"
+        [ngClass]="{'form-invalid': showFormErrors()}"
+  >
+    <div class="contribution__recap" [ngClass]="{'contribution__recap--title-edit': titleEdit}">
       <div class="contribution__recap__content">
 
         <!-- not that nice, but if reacting on __recap click would make click on title edit pencil collide -->
 
-        <div class="contribution__recap__title {{titleClassOpen}}">
+        <div class="contribution__recap__title" [ngClass]="{'contribution__recap__title--open': titleOpen}">
           <div *ngIf="!!title" class="contribution__recap__title__content">
           <span (click)="toggleContributionEditor()">
             {{form.get('title').value}}
@@ -49,7 +51,7 @@
         </div>
         <div class="contribution__recap__progress_bar">
           <div class="contribution__recap__progress_bar__bar">
-            <input type="range" formControlName="progress">
+            <input class="contribution__recap__progress_bar__range" type="range" formControlName="progress">
             <div class="contribution__recap__progress_bar__decoration">
               <!--https://jsfiddle.net/brenna/f4uq9edL/?utm_source=website&utm_medium=embed&utm_campaign=f4uq9edL-->
               <div [ngStyle]="{'width': (form.get('progress').value) + '%'}"
@@ -111,9 +113,19 @@
           </div>
         </div>
         <div class="contribution__edit__measurements__form_ctas">
-          <div class="contribution__edit__measurements__form_ctas__content">
-            <button (click)="toggleContributionEditor(false)">Cancel</button>
-            <button type="submit" value="Submit">Save</button>
+          <div class="contribution__edit__measurements__form_ctas__container">
+            <div class="contribution__edit__measurements__form_ctas__advice">
+              <span class="contribution__edit__measurements__form_ctas__advice__error" *ngIf="showFormErrors()">
+                Please, fill the required fields.
+              </span>
+              <span *ngIf="this.dataPersisted">
+                Your data has been saved!
+              </span>
+            </div>
+            <div class="contribution__edit__measurements__form_ctas__content">
+              <button (click)="toggleContributionEditor(false)">Cancel</button>
+              <button type="submit" value="Submit">Save</button>
+            </div>
           </div>
         </div>
       </div>
