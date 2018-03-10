@@ -7,9 +7,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
   styleUrls: ['contribution.component.scss'],
 })
 
-// https://angular.io/guide/reactive-forms
-
-export class ContributionComponent implements OnInit{
+export class ContributionComponent implements OnInit {
   isValid = false;
   showMoreTitleCta = '... show more';
   titleOpen = false;
@@ -85,6 +83,18 @@ export class ContributionComponent implements OnInit{
     this.titleEdit = !this.titleEdit;
   }
 
+  openContributionEdit(): void {
+    if (! this.contributionEdit) {
+      this.contributionEdit = true;
+    }
+  }
+
+  closeContributionEdit(): void {
+    if (this.contributionEdit) {
+      this.contributionEdit = false;
+    }
+  }
+
   toggleContributionEditor(action?: boolean): void {
     if (!!action || ((undefined === action) && !this.contributionEdit)) {
       this.contributionEdit = true;
@@ -114,6 +124,7 @@ export class ContributionComponent implements OnInit{
   onSubmit() {
     if (this.form.valid) {
       // todo: persist the data
+
       this.showFormAsValid = true;
       this.dataPersisted = true;
       return;

@@ -73,9 +73,13 @@
 }
 
 .layout{
-  padding-top: 80px;
+  padding-top: 40px;
   background: $grey-1;
   border-top: 2px solid $grey-2;
+
+  @include breakpoint($small){
+    padding-top: 80px;
+  }
 
   &__container{
     @include container;

@@ -12,8 +12,7 @@
   }
 
   &__recap {
-    padding: 20px;
-    padding-bottom: 15px;
+    padding: 20px 20px 15px 20px;
 
     &__content {
       display: flex;
@@ -46,7 +45,7 @@
         flex-basis: 50%;
       }
 
-      span {
+      span{
         cursor: pointer;
       }
 
@@ -359,6 +358,10 @@
 
   &--edit &__recap{
     border-bottom: 1px solid $grey-2;
+  }
+
+  &--edit &__recap__title span{
+    cursor: auto;
   }
 
   &--edit &__recap__actions {
