@@ -166,9 +166,11 @@
         padding: 0;
         border: none;
 
-        height: 10px;
+        height: 27px;
         top: 6px;
         @include breakpoint($medium){
+          height: 17px;
+
           top: 3px;
         }
 
@@ -259,10 +261,10 @@
         height: 8px;
         border-radius: 5px;
         position: absolute;
-        top: 8px;
+        top: 15px;
         width: 99%;
         @include breakpoint($medium){
-          top: 4px;
+          top: 7px;
         }
 
         &:focus {
@@ -285,9 +287,11 @@
         min-height: 30px;
         display: flex;
         align-items: center;
+        padding-top: 12px;
+        height: 1em;
 
         @include breakpoint($medium){
-          min-height: 1em;
+          padding-top: 0;
         }
       }
     }
