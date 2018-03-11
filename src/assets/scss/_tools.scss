@@ -10,3 +10,9 @@
 @mixin breakpoint($point) {
   @media (min-width: $point) { @content ; }
 }
+
+@mixin ie11-10 {
+  @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+    @content;
+  }
+}

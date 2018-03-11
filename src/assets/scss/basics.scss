@@ -11,6 +11,7 @@
 
 body{
   background: $grey-1;
+  min-height: 100vh;
 }
 
 .invalid{
@@ -41,7 +42,16 @@ form.form-invalid .ng-invalid,
     background: $white;
     margin-bottom: 15px;
     font-size: 1em;
+  }
 
+  select{
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background: url("../images/down-arrow.png") 98% center no-repeat transparent;
+
+    &::-ms-expand {
+      display: none;
+    }
   }
 
   textarea {

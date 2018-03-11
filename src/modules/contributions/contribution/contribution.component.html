@@ -110,12 +110,15 @@
         <div class="contribution__edit__measurements__form_ctas">
           <div class="contribution__edit__measurements__form_ctas__container">
             <div class="contribution__edit__measurements__form_ctas__advice">
-              <span class="contribution__edit__measurements__form_ctas__advice__error"
-                    [ngStyle]="{'visibility': showFormErrors() ? 'visible' : 'hidden'}"
-              >
+              <span class="contribution__edit__measurements__form_ctas__advice__error" *ngIf="showFormErrors()">
+
+                    <!--[ngStyle]="{'visibility': showFormErrors() ? 'visible' : 'hidden'}"-->
                 Please, fill the required fields.
               </span>
-              <span [ngStyle]="{'visibility': this.dataPersisted ? 'visible' : 'hidden'}">
+              <span *ngIf="dataPersisted && ! showFormErrors()">
+
+                <!--[ngStyle]="{'visibility': this.dataPersisted ? 'visible' : 'hidden'}"-->
+
                 Your data has been saved!
               </span>
             </div>

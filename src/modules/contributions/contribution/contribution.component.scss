@@ -146,7 +146,7 @@
       @include breakpoint($medium) {
         flex-basis: 25%;
         justify-self: flex-end;
-        order: unset;
+        order: inherit;
       }
 
       &__bar {
@@ -159,21 +159,28 @@
 
       &__range {
         width: 100%;
-        -webkit-appearance: none;
         background: transparent;
         z-index: 10;
         position: absolute;
         margin: 0;
+        padding: 0;
+        border: none;
 
+        height: 10px;
+        top: 6px;
+        @include breakpoint($medium){
+          top: 3px;
+        }
+
+        //firefox
         &::-moz-range-thumb{
-          -webkit-appearance: none;
-          appearance: none;
           background: white;
           width: 25px;
           height: 25px;
           border: 1px solid $green;
           border-radius: 50%;
           cursor: pointer;
+          margin-top: 5px;
 
           @include breakpoint($medium){
             width: 15px;
@@ -181,9 +188,14 @@
           }
         }
 
+        &::-moz-range-track{
+          background: transparent;
+        }
+
+        //webkit
+        -webkit-appearance: none;
         &::-webkit-slider-thumb{
           -webkit-appearance: none;
-          appearance: none;
           background: white;
           width: 25px;
           height: 25px;
@@ -195,10 +207,54 @@
             height: 15px;
           }
         }
+
+        //IE
+        @include ie11-10{
+          height: auto;
+        }
+
+        &::-ms-track{
+          background: transparent;
+          color: transparent;
+          border-color: transparent;
+          border-width: 10px 0;
+          @include breakpoint($medium){
+            border-width: 6px 0;
+          }
+        }
+
+        &::-ms-fill-lower {
+          background: $green;
+          border-top-left-radius: 5px;
+          border-bottom-left-radius: 5px;
+        }
+
+        &::-ms-fill-upper {
+          background: $grey-1;
+          border-top-right-radius: 5px;
+          border-bottom-right-radius: 5px;
+        }
+
+        &::-ms-thumb {
+          //-webkit-appearance: none;
+          background: white;
+          width: 25px;
+          height: 25px;
+          border: 1px solid $green;
+          border-radius: 50%;
+          cursor: pointer;
+          @include breakpoint($medium){
+            width: 15px;
+            height: 15px;
+          }
+        }
+
       }
 
-
       &__decoration {
+        @include ie11-10{
+          display: none;
+        }
         background: $grey-1;
         height: 8px;
         border-radius: 5px;
